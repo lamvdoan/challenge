@@ -2,7 +2,7 @@
 A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is
 9009 = 91 99.  Find the largest palindrome made from the product of two 3-digit numbers.
 
-Disclaimer: I originally did not come up with optimal idea to solve this quicker.  I incremented the for loop instead.
+O notation is n^2 + 2n :(.  Handles 4 digits, but 5 is slower..
 """
 
 from datetime import datetime
@@ -43,11 +43,11 @@ def get_max_palindrome_product():
                 multiplicand = outer
                 multiplier = inner
 
-                # If the absolute max is found during a change of outer, then no need to iterate
+                # If the absolute max is found during a change of outer, then skip iteration
                 break
 
-        # if the max product of the remaining numbers to iterate is less than the max palindrome, then no need to iterate
-        if outer * 999 < max_palindrome:
+        # if the max product of the remaining numbers to iterate is less than the max palindrome, then skip iteration
+        if outer * max_number < max_palindrome:
             break
 
     print "Outer number: {}".format(multiplicand)
