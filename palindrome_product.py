@@ -10,10 +10,10 @@ import sys
 
 
 def get_max_palindrome():
-    start_time = datetime.utcnow()
-
     # Input constraint check
     number_of_digits = raw_input("Enter number of digits (1-6): ")
+
+    start_time = datetime.utcnow()
 
     try:
         number_of_digits = int(number_of_digits)
