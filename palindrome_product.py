@@ -1,17 +1,17 @@
 """
-A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 99.
-Find the largest palindrome made from the product of two 3-digit numbers.
+A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is
+9009 = 91 99.  Find the largest palindrome made from the product of two 3-digit numbers.
 
-Disclaimer: I originally (written in Java) did not come up with the optimal way to solve this.  I incremented the for loop instead.
+Disclaimer: I originally did not come up with optimal idea to solve this quicker.  I incremented the for loop instead.
 """
 
 from datetime import datetime
 import sys
 
 
-def get_max_palindrome():
+def get_max_palindrome_product():
     # Input constraint check
-    number_of_digits = raw_input("Enter number of digits (1-6): ")
+    number_of_digits = raw_input("Enter number of digits (1-6): \n")
 
     start_time = datetime.utcnow()
 
@@ -50,14 +50,12 @@ def get_max_palindrome():
         if outer * 999 < max_palindrome:
             break
 
-    print "\nouter number: {}".format(multiplicand)
-    print "inner number: {}".format(multiplier)
-    print "Max palindrome: {}".format(max_palindrome)
+    print "Outer number: {}".format(multiplicand)
+    print "Inner number: {}".format(multiplier)
+    print "Max palindrome: {}\n".format(max_palindrome)
 
-    end_time = datetime.utcnow()
-    time_elapsed = end_time - start_time
-    time_elapsed = time_elapsed.total_seconds()
-    print "\nTotal seconds: {}".format(time_elapsed)
+    time_elapsed = (datetime.utcnow() - start_time).total_seconds()
+    print "Total seconds: {}".format(time_elapsed)
 
 
 def get_max_number(number_of_digits):
@@ -69,7 +67,7 @@ def get_max_number(number_of_digits):
 
 def get_min_number(number_of_digits):
     min_number = "1"
-    for number in range(0, number_of_digits-1):
+    for number in range(0, number_of_digits - 1):
         min_number += "0"
     return int(min_number)
 
@@ -78,4 +76,5 @@ def is_palindrome(number):
     number = str(number)
     return True if number == number[::-1] else False
 
-get_max_palindrome()
+
+get_max_palindrome_product()
