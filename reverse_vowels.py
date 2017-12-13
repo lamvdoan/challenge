@@ -46,7 +46,7 @@ def reverse_vowels_of_string():
 
 
 def is_a_vowel(char):
-    vowels = {"a", "e", "i", "o", "u"}
+    vowels = {"a", "e", "i", "o", "u", "A", "E", "I", "O", "U"}
 
     for vowel in vowels:
         if char == vowel:
