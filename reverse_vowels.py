@@ -28,7 +28,7 @@ def reverse_vowels_of_string():
     list_of_indices = []
 
     # Gather a list of vowels and a list of their indices
-    for index in range(0, len(original_string) - 1):
+    for index in range(0, len(original_string)):
         if is_a_vowel(original_string[index]):
             list_of_vowels.append(original_string[index])
             list_of_indices.append(index)
