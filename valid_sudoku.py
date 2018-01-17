@@ -62,134 +62,44 @@ def add_number(number, number_set):
         number_set.add(number)
 
 
-def print_them():
-    print box0
-    print box1
-    print box2
-    print box3
-    print box4
-    print box5
-    print box6
-    print box7
-    print box8
-    print
-
-    print row0
-    print row1
-    print row2
-    print row3
-    print row4
-    print row5
-    print row6
-    print row7
-    print row8
-    print
-
-    print column0
-    print column1
-    print column2
-    print column3
-    print column4
-    print column5
-    print column6
-    print column7
-    print column8
-
-
 # Code starts here
-
-box0 = set()
-box1 = set()
-box2 = set()
-box3 = set()
-box4 = set()
-box5 = set()
-box6 = set()
-box7 = set()
-box8 = set()
-
-row0 = set()
-row1 = set()
-row2 = set()
-row3 = set()
-row4 = set()
-row5 = set()
-row6 = set()
-row7 = set()
-row8 = set()
-
-column0 = set()
-column1 = set()
-column2 = set()
-column3 = set()
-column4 = set()
-column5 = set()
-column6 = set()
-column7 = set()
-column8 = set()
-
+boxes = []
+rows = []
+columns = []
 print_board()
 
 # Iterate through the input and add numbers in the appropriate rows, columns, boxes
-for row in range(9):
-    for column in range(9):
-        item = initial_sudoku_board[column + (row * 9)]
+for row_index in range(9):
+    
+    for column_index in range(9):
+        item = initial_sudoku_board[column_index + (row_index * 9)]
 
-        if row == 0:
-            add_number(item, row0)
-        elif row == 1:
-            add_number(item, row1)
-        elif row == 2:
-            add_number(item, row2)
-        elif row == 3:
-            add_number(item, row3)
-        elif row == 4:
-            add_number(item, row4)
-        elif row == 5:
-            add_number(item, row5)
-        elif row == 6:
-            add_number(item, row6)
-        elif row == 7:
-            add_number(item, row7)
-        elif row == 8:
-            add_number(item, row8)
+        # Instantiate rows, boxes, columns
+        if row_index == 0:
+            rows.append(set())
+            columns.append(set())
+            boxes.append(set())
 
-        if column == 0:
-            add_number(item, column0)
-        elif column == 1:
-            add_number(item, column1)
-        elif column == 2:
-            add_number(item, column2)
-        elif column == 3:
-            add_number(item, column3)
-        elif column == 4:
-            add_number(item, column4)
-        elif column == 5:
-            add_number(item, column5)
-        elif column == 6:
-            add_number(item, column6)
-        elif column == 7:
-            add_number(item, column7)
-        elif column == 8:
-            add_number(item, column8)
+        add_number(item, rows[row_index])
+        add_number(item, columns[column_index])
 
-        if row < 3 and column < 3:
-            add_number(item, box0)
-        elif row < 3 and 2 < column < 6:
-            add_number(item, box1)
-        elif row < 3 and 5 < column < 9:
-            add_number(item, box2)
-        elif 2 < row < 6 and column < 3:
-            add_number(item, box3)
-        elif 2 < row < 6 and 2 < column < 6:
-            add_number(item, box4)
-        elif 2 < row < 6 and 5 < column < 9:
-            add_number(item, box5)
-        elif row > 5 and column < 3:
-            add_number(item, box6)
-        elif row > 5 and 2 < column < 6:
-            add_number(item, box7)
-        elif row > 5 and 5 < column < 9:
-            add_number(item, box8)
+        if row_index < 3 and column_index < 3:
+            add_number(item, boxes[0])
+        elif row_index < 3 and 2 < column_index < 6:
+            add_number(item, boxes[1])
+        elif row_index < 3 and 5 < column_index < 9:
+            add_number(item, boxes[2])
+        elif 2 < row_index < 6 and column_index < 3:
+            add_number(item, boxes[3])
+        elif 2 < row_index < 6 and 2 < column_index < 6:
+            add_number(item, boxes[4])
+        elif 2 < row_index < 6 and 5 < column_index < 9:
+            add_number(item, boxes[5])
+        elif row_index > 5 and column_index < 3:
+            add_number(item, boxes[6])
+        elif row_index > 5 and 2 < column_index < 6:
+            add_number(item, boxes[7])
+        elif row_index > 5 and 5 < column_index < 9:
+            add_number(item, boxes[8])
 
 print "This is a valid puzzle"
