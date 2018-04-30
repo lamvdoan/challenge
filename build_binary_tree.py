@@ -31,23 +31,35 @@ class Tree:
         self._traverse_down_the_tree(input_number, self)
 
     def _traverse_down_the_tree(self, input_number, node):
+        """
+        Sets the number if the current node is empty.  Otherwise, figure out if it belongs on the left or right node, or
+        if it needs to traverse downwards until it find an empty node to set it to.
+
+        :param input_number: number to add
+        :param node: the current node the pointer is at
+        """
+
         if node.number is None:
             print "Setting number = {}".format(input_number)
             print
             node.number = input_number
         elif input_number > node.get_number():
             if node.right is None:
+                # Create a right node since it's empty
                 print "{} is Right of {}".format(input_number, node.get_number())
                 node.right = Tree()
                 node.right.add_number(input_number)
             else:
+                # This node has a value, traverse down the node and compare values
                 self._traverse_down_the_tree(input_number, node.right)
         else:
             if node.left is None:
+                # Create a left node since it's empty
                 print "{} is Left of {}".format(input_number, node.get_number())
                 node.left = Tree()
                 node.left.add_number(input_number)
             else:
+                # This node has a value, traverse down the node and compare values
                 self._traverse_down_the_tree(input_number, node.left)
 
     def get_left(self):
@@ -80,6 +92,13 @@ class BinaryTree:
             sys.exit(1)
 
     def print_tree(self):
+        """
+        Obsolete method, since the logging on creation was implemented after this method.  This method looks too good
+        to delete, leaving it here for fun.  It also serves as a double check of the tree.
+
+        Print the all of the vales of the tree while indicating if it's left or the right.
+        """
+
         print "**********************************"
         print "List of numbers: "
         print self.numbers
@@ -96,10 +115,7 @@ class BinaryTree:
 
     def _print_value_of_node(self, current_node):
         """
-        Obsolete method, since the logging on creation was implemented after this method.  This method looks too good
-        to delete, leaving it here for fun.  It also serves as a double check of the tree.
-
-        This method prints the value of each node.
+        This method prints the value of each node as it traverses downwards.
         """
 
         if current_node is not None:
