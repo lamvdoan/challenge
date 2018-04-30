@@ -1,5 +1,5 @@
 """
-Create a binary a tree.  Greater number goes right, otherwise go left.
+Create a binary tree.  Greater number goes right, otherwise go left.
 
 Sample:
 [15, 1, 30, 25, 31, 17, 16]
@@ -19,7 +19,7 @@ Sample:
 import sys
 
 
-class Tree:
+class Leaf:
     number = None
     left = None
     right = None
@@ -47,7 +47,7 @@ class Tree:
             if node.right is None:
                 # Create a right node since it's empty
                 print "{} is Right of {}".format(input_number, node.get_number())
-                node.right = Tree()
+                node.right = Leaf()
                 node.right.add_number(input_number)
             else:
                 # This node has a value, traverse down the node and compare values
@@ -56,7 +56,7 @@ class Tree:
             if node.left is None:
                 # Create a left node since it's empty
                 print "{} is Left of {}".format(input_number, node.get_number())
-                node.left = Tree()
+                node.left = Leaf()
                 node.left.add_number(input_number)
             else:
                 # This node has a value, traverse down the node and compare values
@@ -73,17 +73,17 @@ class Tree:
 
 
 class BinaryTree:
-    tree = None
+    leaf = None
     numbers = None
 
     def __init__(self, numbers):
         self.numbers = numbers
-        self.tree = Tree()
+        self.leaf = Leaf()
 
         for index in range(len(self.numbers)):
             number = self.numbers[index]
             self._check_if_input_is_a_number(number)
-            self.tree.add_number(number)
+            self.leaf.add_number(number)
 
     @staticmethod
     def _check_if_input_is_a_number(input_number):
@@ -106,8 +106,8 @@ class BinaryTree:
         print "Print Tree"
         print "**********"
 
-        if self.tree is not None:
-            current_node = self.tree
+        if self.leaf is not None:
+            current_node = self.leaf
             self._print_value_of_node(current_node)
         else:
             print "No numbers"
