@@ -1,3 +1,21 @@
+"""
+Create a binary a tree.  Greater number goes right, otherwise go left.
+
+Sample:
+[15, 1, 30, 25, 31, 17, 16]
+
+         15
+        /  \
+       1   30
+           /\
+         25 31
+        /
+       17
+      /
+     16
+
+"""
+
 import sys
 
 
@@ -9,40 +27,28 @@ class Tree:
     def __init__(self):
         pass
 
-    # TODO: Traverse thru the tree
     def add_number(self, input_number):
-        if not isinstance(input_number, int):
-            print "This is not a number: {}".format(input_number)
-            sys.exit(1)
+        self._traverse_down_the_tree(input_number, self)
 
-        if self.number is None:
+    def _traverse_down_the_tree(self, input_number, node):
+        if node.number is None:
             print "Setting number = {}".format(input_number)
             print
-            self.number = input_number
-        elif input_number > self.get_number():
-            if self.left is None:
-                print "Creating Left: {} <= {}".format(input_number, self.get_number())
-                self.left = Tree()
-                self.left.add_number(input_number)
+            node.number = input_number
+        elif input_number > node.get_number():
+            if node.right is None:
+                print "{} is Right of {}".format(input_number, node.get_number())
+                node.right = Tree()
+                node.right.add_number(input_number)
             else:
-                self._get_node(self.left)
+                self._traverse_down_the_tree(input_number, node.right)
         else:
-
-        # if self.number is None:
-        #     print "Setting number = {}".format(input_number)
-        #     print
-        #     self.number = input_number
-        # elif input_number > self.get_number():
-        #     print "Creating Right: {} > {}".format(input_number, self.get_number())
-        #     self.right = Tree()
-        #     self.right.add_number(input_number)
-        # else:
-        #     print "Creating Left: {} <= {}".format(input_number, self.get_number())
-        #     self.left = Tree()
-        #     self.left.add_number(input_number)
-
-    def _get_node(self, current_node):
-
+            if node.left is None:
+                print "{} is Left of {}".format(input_number, node.get_number())
+                node.left = Tree()
+                node.left.add_number(input_number)
+            else:
+                self._traverse_down_the_tree(input_number, node.left)
 
     def get_left(self):
         return self.left
@@ -55,53 +61,67 @@ class Tree:
 
 
 class BinaryTree:
-    main_tree = None
+    tree = None
+    numbers = None
 
-    def __init__(self):
-        pass
+    def __init__(self, numbers):
+        self.numbers = numbers
+        self.tree = Tree()
 
-    def create_tree(self, numbers):
-        self.main_tree = Tree()
+        for index in range(len(self.numbers)):
+            number = self.numbers[index]
+            self._check_if_input_is_a_number(number)
+            self.tree.add_number(number)
 
-        for index in range(len(numbers)):
-            number = numbers[index]
-            self.main_tree.add_number(number)
+    @staticmethod
+    def _check_if_input_is_a_number(input_number):
+        if not isinstance(input_number, int):
+            print "This is not a number: {}".format(input_number)
+            sys.exit(1)
 
     def print_tree(self):
+        print "**********************************"
+        print "List of numbers: "
+        print self.numbers
         print
         print "Print Tree"
-        print "**********************"
-        if self.main_tree is not None:
-            current_node = self.main_tree
+        print "**********"
+
+        if self.tree is not None:
+            current_node = self.tree
             self._print_value_of_node(current_node)
         else:
             print "No numbers"
             sys.exit(1)
 
     def _print_value_of_node(self, current_node):
-        print "_get_value_of_node()"
+        """
+        Obsolete method, since the logging on creation was implemented after this method.  This method looks too good
+        to delete, leaving it here for fun.  It also serves as a double check of the tree.
+
+        This method prints the value of each node.
+        """
+
         if current_node is not None:
-            print str(current_node.get_number()) + ", "
+            current_number = current_node.get_number()
+            left_node = current_node.get_left()
+            right_node = current_node.get_right()
+            print current_number
 
-            if current_node.get_left() is not None:
+            if left_node is not None:
                 print "Check LEFT"
-                self._print_value_of_node(current_node.get_left())
-            elif current_node.get_right() is not None:
+                print
+                self._print_value_of_node(left_node)
+            else:
+                print "Current node [{}] has no left node:".format(current_number)
+
+            if right_node is not None:
                 print "Check RIGHT"
-                self._print_value_of_node(current_node.get_right())
+                print
+                self._print_value_of_node(right_node)
+            else:
+                print "Current node [{}] has no right node:".format(current_number)
 
-            if current_node.get_right() is not None:
-                print "Check RIGHT"
-                self._print_value_of_node(current_node.get_right())
-            elif current_node.get_left() is not None:
-                print "Check LEFT"
-                self._print_value_of_node(current_node.get_left())
-
-
-# numbers = [10, 12, 9]
-numbers = [10, 12, 9, 13, 7, 8]
-binary_tree = BinaryTree()
-binary_tree.create_tree(numbers)
-
-print numbers
+sample_numbers = [15, 1, 30, 25, 31, 17, 16]
+binary_tree = BinaryTree(sample_numbers)
 binary_tree.print_tree()
