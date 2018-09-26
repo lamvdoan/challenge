@@ -13,7 +13,7 @@ class Chain:
     def __init__(self):
         pass
 
-    count = 1
+    count = 0
 
     def calculate_chain(self, number, count):
         if number == 1:
