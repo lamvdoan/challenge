@@ -12,16 +12,13 @@ Between 1 to 1,000,000 as the starting number, which number will generate the lo
 def calculate_chain(number, count):
     if number == 1:
         return count
-
     elif number % 2 == 0:
-        count += 1
         number /= 2
-        return calculate_chain(number, count)
-
     else:
-        count += 1
         number = (3 * number) + 1
-        return calculate_chain(number, count)
+
+    count += 1
+    return calculate_chain(number, count)
 
 
 longest_number = 1
