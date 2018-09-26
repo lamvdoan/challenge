@@ -9,43 +9,29 @@ Between 1 to 1,000,000 as the starting number, which number will generate the lo
 """
 
 
-class Chain:
-    def __init__(self):
-        pass
+def calculate_chain(number, count):
+    if number == 1:
+        return count
 
-    count = 0
+    elif number % 2 == 0:
+        count += 1
+        number /= 2
+        return calculate_chain(number, count)
 
-    def calculate_chain(self, number, count):
-        if number == 1:
-            self.count = count
-
-        elif number % 2 == 0:
-            count += 1
-            number /= 2
-            self.calculate_chain(number, count)
-
-        else:
-            count += 1
-            number = (3 * number) + 1
-            self.calculate_chain(number, count)
+    else:
+        count += 1
+        number = (3 * number) + 1
+        return calculate_chain(number, count)
 
 
-if __name__ == '__main__':
-    longest_number = 1
-    longest_count = 0
+longest_number = 1
+longest_count = 1
 
-    for number in range(1, 1000000):
-        count = 0
+for number in range(1, 1000000):
+    count = calculate_chain(number, 1)
 
-        chain = Chain()
-        chain.calculate_chain(number, count)
+    if count > longest_count:
+        longest_count = count
+        longest_number = number
 
-        if chain.count > longest_count:
-            longest_count = chain.count
-            longest_number = number
-
-        print number, chain.count
-
-    print
-    print "Longest Number, Longest Count"
-    print longest_number, longest_count
+print longest_number, longest_count
