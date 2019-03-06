@@ -1,9 +1,9 @@
 """
 Given an array, the new value of each element is the product of every other elements excluding itself.
-array[n] = array[min(n)] * array[n+1] * ...  * array[max(n)]
+array[n] = array[0] * ... * array[n-1] * array[n+1] * ...  * array[max_index]
 
 Example:
-array = [1, 3, 5], then new_array = [15, 5, 3].
+array = [1, 3, 5], new_array = [15, 5, 3]
 array[0] = array[1] * array[2] = 3 * 5 = 15
 array[1] = array[0] * array[2] = 1 * 5 = 5
 array[2] = array[0] * array[1] = 1 * 3 = 3
@@ -46,7 +46,6 @@ for value in original_array:
                 new_array.append(0)
         else:
             new_array.append(total_product / value)
-
 
 print original_array
 print new_array
